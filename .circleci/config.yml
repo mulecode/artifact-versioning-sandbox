@@ -1,0 +1,72 @@
+version: 2.1
+
+executors:
+  jdk-executor:
+    docker:
+      - image: circleci/openjdk:11-jdk
+    working_directory: "~/build"
+    environment:
+
+jobs:
+  build:
+    executor: jdk-executor
+    environment:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "28:8d:87:e8:f6:6f:1b:c1:44:82:d0:88:a8:9e:d1:ce"
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle.kts" }}
+          - v1-dependencies-
+      - run:
+          name: Downloading Gradle depedencies
+          command: gradle dependencies
+      - save_cache:
+          paths:
+          - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle.kts" }}
+      - run:
+          name: Running Junits Tests
+          command: gradle test
+
+  deploy:
+    executor: jdk-executor
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "28:8d:87:e8:f6:6f:1b:c1:44:82:d0:88:a8:9e:d1:ce"
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle.kts" }}
+            - v1-dependencies-
+      - run:
+          name: Downloading Gradle depedencies
+          command: gradle dependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle.kts" }}
+      - run:
+          name: Building Java artifact
+          command: gradle scmVersion build
+      - run:
+          name: Pushing SCM Tags
+          command: gradle scmVersionPush
+
+workflows:
+  version: 2.1
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: /.*/
+      - deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
