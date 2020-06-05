@@ -1,6 +1,5 @@
 plugins {
     java
-//    id("uk.co.mulecode.artifact-versioning") version "1.0.0.BUILD-SNAPSHOT"
     id("uk.co.mulecode.artifact-versioning") version "1.0.0.RELEASE"
 }
 

@@ -10,7 +10,7 @@ clean:
 	./gradlew clean
 
 compile: clean
-	./gradlew scmVersion build
+	./gradlew --refresh-dependencies scmVersion build
 
 pushTag:
 	./gradlew scmVersionPush
