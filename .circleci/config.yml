@@ -51,7 +51,7 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
       - run:
           name: Building Java artifact
-          command: gradle scmVersion build
+          command: gradle --refresh-dependencies scmVersion build
       - run:
           name: Pushing SCM Tags
           command: gradle scmVersionPush
