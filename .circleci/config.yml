@@ -14,6 +14,12 @@ parameters:
   workflow_release:
     type: boolean
     default: false
+  build_env:
+    type: string
+    default: dev
+  build_version:
+    type: string
+    default: 1.0.0
 
 jobs:
   build:
@@ -75,6 +81,8 @@ jobs:
           name: Details
           command: |
             echo "details for release"
+            echo $build_env
+            echo $build_version
 
 workflows:
   version: 2.1
