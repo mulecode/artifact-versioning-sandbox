@@ -81,3 +81,7 @@ workflows:
               only: master
           requires:
             - build
+  release:
+    when: << pipeline.parameters.workflow_release >>
+    jobs:
+      - release
