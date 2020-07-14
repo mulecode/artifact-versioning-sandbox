@@ -1,12 +1,11 @@
 plugins {
     java
-    id("uk.co.mulecode.artifact-versioning") version "1.0.0.RELEASE"
+    id("uk.co.mulecode.artifact-versioning") version "1.0.1.R1"
 }
 
 versionConfig {
     versionIncrementer = "PATCH"
-    tagSuffix = "M"
-    initialVersion = "1.0.0"
+    tagSuffix = "RELEASE"
 }
 
 group = "com.mulecode"
@@ -17,6 +16,11 @@ repositories {
 }
 
 dependencies {
+    annotationProcessor("org.projectlombok:lombok:1.18.12")
+    compileOnly("org.projectlombok:lombok:1.18.12")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.12")
+    testCompileOnly("org.projectlombok:lombok:1.18.12")
+
     testImplementation("junit", "junit", "4.12")
 }
 

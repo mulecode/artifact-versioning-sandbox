@@ -1,0 +1,47 @@
+GET https://api.github.com/repos/mulecode/artifact-versioning-sandbox/releases
+Accept: application/vnd.github.v3+json
+Authorization: token d43e53efe666477b4c80569e7840606d7dd2597c
+
+
+###
+
+GET https://api.github.com/repos/mulecode/artifact-versioning-sandbox/releases/tags/v1.0.0.M2
+Accept: application/vnd.github.v3+json
+Authorization: token d43e53efe666477b4c80569e7840606d7dd2597c
+
+
+###
+
+GET https://api.github.com/repos/mulecode/artifact-versioning-sandbox/releases/latest
+Accept: application/vnd.github.v3+json
+Authorization: token d43e53efe666477b4c80569e7840606d7dd2597c
+
+###
+
+POST https://api.github.com/repos/mulecode/artifact-versioning-sandbox/releases
+Accept: application/vnd.github.v3+json
+Authorization: token d43e53efe666477b4c80569e7840606d7dd2597c
+
+{
+  "tag_name": "v1.0.0.M2",
+  "target_commitish": "master",
+  "name": "v1.0.0.M2",
+  "body": "Description of the release",
+  "draft": false,
+  "prerelease": false
+}
+
+###
+
+PATCH https://api.github.com/repos/mulecode/artifact-versioning-sandbox/releases/27264127
+Accept: application/vnd.github.v3+json
+Authorization: token d43e53efe666477b4c80569e7840606d7dd2597c
+
+{
+  "tag_name": "v1.0.0.M2",
+  "target_commitish": "master",
+  "name": "v1.0.0.M2",
+  "body": "### Description of the release updated \n - feature one \n - feature two",
+  "draft": false,
+  "prerelease": true
+}
