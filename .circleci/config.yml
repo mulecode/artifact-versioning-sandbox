@@ -72,17 +72,23 @@ jobs:
 
   release:
     executor: jdk-executor
+    environment:
+      BUILD_ENV: << pipeline.parameters.build_env >>
+      BUILD_VERSION: << pipeline.parameters.build_version >>
     steps:
       - add_ssh_keys:
           fingerprints:
             - "28:8d:87:e8:f6:6f:1b:c1:44:82:d0:88:a8:9e:d1:ce"
-      - checkout
       - run:
-          name: Details
+          name: Checkout
           command: |
-            echo "details for release"
-            echo $build_env
-            echo $build_version
+            echo "checking out version:"
+            echo $BUILD_VERSION
+      - run:
+          name: Execute Terraform
+          command: |
+            echo "terraform:"
+            echo $BUILD_ENV
 
 workflows:
   version: 2.1
