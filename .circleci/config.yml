@@ -84,11 +84,16 @@ jobs:
           command: |
             echo "checking out version:"
             echo $BUILD_VERSION
+            git checkout tags/$BUILD_VERSION
       - run:
           name: Execute Terraform
           command: |
             echo "terraform:"
             echo $BUILD_ENV
+      - run:
+          name: Tag
+          command: |
+            git tag $BUILD_ENV -f
 
 workflows:
   version: 2.1
