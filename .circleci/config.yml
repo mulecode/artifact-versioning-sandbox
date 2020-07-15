@@ -94,7 +94,8 @@ jobs:
       - run:
           name: Tag
           command: |
-            git tag $BUILD_ENV -f
+            echo $BUILD_ENV
+            git tag $BUILD_ENV -f && git push --force origin $BUILD_ENV
 
 workflows:
   version: 2.1
