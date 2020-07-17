@@ -5,8 +5,8 @@ plugins {
 }
 
 versionConfig {
-    versionIncrementer = "PATCH"
-    tagSuffix = "SNAPSHOT"
+    versionIncrementer = "MINOR"
+    tagSuffix = "RELEASE"
 }
 
 group = "com.mulecode"
